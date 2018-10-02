@@ -3,10 +3,17 @@ class Search extends React.Component {
     super();
     this.state = {term: ''};
   }
+  update(term) {
+    this.setState({term: term});
+    console.log(term);
+  }
   render() {
     return (
       <div className="search-bar form-inline">
-        <input className="form-control" type="text" onChange={(event)=> console.log(event.target.value)}/>
+        <input className="form-control" 
+          type="text" 
+          value={this.state.term}
+          onChange={(event)=> this.update(event.target.value)}/>
         <button className="btn hidden-sm-down">
           <span className="glyphicon glyphicon-search"></span>
         </button>
