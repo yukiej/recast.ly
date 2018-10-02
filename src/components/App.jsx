@@ -1,6 +1,7 @@
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 import Search from './Search.js';
+import searchYouTube from '../lib/searchYouTube.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,14 +12,33 @@ class App extends React.Component {
       term: ''
     };
   }
+  
+  handleClick(currentVideo) {
+    this.setState({currentVideo: currentVideo});
+  }
+  
+  handleSearch(term) {
+    console.log(term);
+    searchYouTube(term, data => {
+      this.setState({
+        currentVideo: data.items[0],
+        videoList: data.items,
+        term: term
+      });
+    });
+  }
+  
+  
+  
   render() {
-    // console.log(this.props)
-    // console.log(this.state.currentVideo)
+    searchYouTube();
+    // console.log(this.state.videoList);
+    // console.log(this.state.term)
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search handleSearch={this.handleSearch.bind(this)} />
           </div>
         </nav>
         <div className="row">
@@ -26,7 +46,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo} />
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.videoList} />
+            <VideoList videos={this.state.videoList} handleClick={this.handleClick.bind(this)} />
           </div>
         </div>
       </div>

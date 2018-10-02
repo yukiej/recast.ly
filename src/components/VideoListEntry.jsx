@@ -5,9 +5,8 @@ var VideoListEntry = (props) => {
   const thumbnail = props.video.snippet.thumbnails.default.url;
   const title = props.video.snippet.title;
   const description = props.video.snippet.description;
-  
   return (
-    <div className="video-list-entry media">
+    <div className="video-list-entry media" onClick={() => props.handleClick(props.video)} >
       <div className="media-left media-middle">
         <img className="media-object" src={thumbnail} alt="" />
       </div>

@@ -6,6 +6,7 @@ var VideoList = (props) => {
       <VideoListEntry 
         key={element.etag}
         video={element}
+        handleClick={props.handleClick}
       />
     );
   });
